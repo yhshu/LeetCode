@@ -14,6 +14,13 @@ Returns: False
  */
 class Solution {
     public boolean isPerfectSquare(int num) {
-
+        int[] perfectSquare = new int[47000];
+        for (int i = 0; i != 46340; ++i) {
+            perfectSquare[i] = i * i + 2 * i + 1;
+        }
+        for (int i = 0; i != 46340; ++i)
+            if (num == perfectSquare[i])
+                return true;
+        return false;
     }
 }
