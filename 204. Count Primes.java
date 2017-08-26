@@ -8,7 +8,8 @@ class Solution {
             isPrime[i] = true;
         if (n <= 1)
             return 0;
-        for (int i = 2; i != n; ++i) {
+        for (int i = 2; i != n; ++i) // 埃拉托斯特尼筛法 Sieve of Eratosthenes
+        {
             for (int j = 2; ; ++j) {
                 if (i * j > n)
                     break;
