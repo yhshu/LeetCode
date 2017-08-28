@@ -10,17 +10,17 @@ Given "bbbbb", the answer is "b", with the length of 1.
 Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 */
 
-int inString(const char *start, const char *end, const char ch) {
-    //在字符串中返回1，不在字符串中返回0.
+int judgeRepeat(const char *start, const char *end) {
+    //在字符串中返回移动长度，不在字符串中返回0，即不移动.
+    int ret = 0;
     char *i = start;
     while (i != end) {
-        if (*i != ch)
-            i++;
-        else return 1;
+        if (*i == *end)
+            return ret + 1;//跳转到重复字符后
+        ret++;
+        i++;
     }
-    if (*end == ch)
-        return 1;
-    return 0;
+    return 0;// 没有与*end 相同的字符，不移动，返回0
 }
 
 int lengthOfLongestSubstring(char *s) {
@@ -30,20 +30,11 @@ int lengthOfLongestSubstring(char *s) {
     int cnt = 1;//记录子串长度
     char *start = s, *end = s;
 
-    int i;
-    for (i = 1; *(s + i) != NULL; ++i) {
-        if (inString(start, end, *(s + i))) {
-            if (start == end) {
-                start++;
-                end++;
-            } else {
-                start++;
-                cnt = (end - start) + 1;
-            }
-        } else {
-            end++;
-            cnt++;
-        }
+    for (; *end != NULL; ++end) {
+        if (end - start < 0)start = end;
+        else
+            start += judgeRepeat(start, end);
+        cnt = (end - start) + 1;
         if (cnt > ret)
             ret = cnt;
     }
