@@ -11,10 +11,26 @@ Note: The input will be in range of [-1e7, 1e7].
 
  */
 
+//反转字符串
+char *strrev(char *str) {
+    char *p1, *p2;
+
+    if (!str || !*str)
+        return str;
+    for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2) {
+        *p1 ^= *p2;
+        *p2 ^= *p1;
+        *p1 ^= *p2;
+    }
+    return str;
+}
+
 //10进制整数转换为7进制（字符串）
 class Solution {
 public:
     string convertToBase7(int num) {
+        if (num == 0)
+            return "0";
         char res[10] = {0};
         int i = 0;
         bool sign;
@@ -29,7 +45,9 @@ public:
         }
         if (!sign)
             res[i] = '-';
-        //反转字符串
+        res[i + 1] = '\0';
+        strrev(res);
         return res;
     }
 };
+
