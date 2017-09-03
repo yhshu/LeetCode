@@ -21,29 +21,37 @@ Explanation: It's the substring "abc" four times. (And the substring "abcabc" tw
  */
 
 bool repeatedSubstringPattern(char *s) {
-    char *start = s, *end = s + 1;
-    int strlen = 0;//字符串总长度
-    while (*start != '\0') {
-        strlen++;
-        start++;
+    int len = 0;
+    int *p = s;
+    bool flag = true, flag1 = true;
+    while (*p != '\0') {
+        len++;
+        p++;
     }
-    int sublen = 1;//重复子串的长度
-    while (*end != NULL) {
-        if (*s != *end) {
-            sublen++;
-            end++;
-        } else break;
+    int i, j, k;
+    for (i = 1; i <= len / 2; ++i) //i 是子串长度
+    {
+        flag1 = true;
+        if (len % i != 0)
+            continue;
+        for (j = 0; j != i; ++j)//遍历子串中的每个字符
+        {
+            flag = true;
+            k = 1;
+            while (j + k * i < len) {
+                if (*(s + j + k * i) != *(s + j)) {
+                    flag = false;
+                    break;
+                }
+                k++;
+            }
+            if (!flag) {
+                flag1 = false;
+                break;
+            }
+        }
+        if (flag1)
+            return true;
     }
-
-    if (strlen % sublen != 0)
-        return false;
-    end = s + sublen;
-    start = s;
-    while (end <= s + strlen) {
-        if (*start == *end) {
-            start++;
-            end++;
-        } else return false;
-    }
-    return true;
+    return false;
 }
