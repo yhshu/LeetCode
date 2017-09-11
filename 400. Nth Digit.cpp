@@ -28,13 +28,13 @@ public:
     int findNthDigit(int n) {
         long long len = 1, cnt = 9, start = 1;
         while (n > len * cnt) {
-            n -= len * cnt;//减9，减90，减900，……
+            n -= len * cnt;//减1*9，减2*90，减3*900，……；即减掉所有个位数、十位数、百位数……
             ++len;//位数
-            cnt *= 10;
-            start *= 10;//n必定大于等于start
+            cnt *= 10;//9,90,900,……
+            start *= 10;
         }
-        start += (n - 1) / len;
-        string res = to_string(start);
-        return res[(n - 1) % len] - '0';
+        start += (n - 1) / len;//定位所求数字所属的自然数
+        string res = to_string(start);//将该自然数转为string
+        return res[(n - 1) % len] - '0';//找到所求数字
     }
 };
