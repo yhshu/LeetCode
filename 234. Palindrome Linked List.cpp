@@ -1,3 +1,10 @@
+/*
+Given a singly linked list, determine if it is a palindrome.
+
+Follow up:
+Could you do it in O(n) time and O(1) space?
+ */
+
 /**
 * Definition for singly-linked list.
 * struct ListNode {
@@ -9,32 +16,33 @@
 class Solution {
 public:
 	bool isPalindrome(ListNode* head) {
-		if (head == NULL || head->next == NULL)//没有元素或只有1个元素
+		if (head == NULL || head->next == NULL)
 			return true;
-		
-		while (head != NULL)
-		{
-			s1.push(head->val); 
-            head= head->next;
+		ListNode* slow = head;
+		ListNode* fast = head;
+		while (fast->next != NULL&&fast->next->next != NULL) {
+			slow = slow->next;
+			fast = fast->next->next;
 		}
-		bool odd =( s1.size() % 2);
-		for (int i = 1; i <= s1.size() / 2; ++i)
-		{
-			s2.push(s1.top());
-			s1.pop();
-		}
-		if (odd)
-			s1.pop();
-		for (int i = 1; i <= s1.size(); ++i)
-		{
-			if (s1.top() != s2.top())
+		slow->next = reverseList(slow->next);
+		slow = slow->next;
+		while (slow != NULL) {
+			if (head->val != slow->val)
 				return false;
-			s1.pop(); s2.pop();
+			head = head->next;
+			slow = slow->next;
 		}
 		return true;
 	}
-    
-private:
-    stack<int> s1;
-	stack<int> s2;
+	ListNode* reverseList(ListNode* head) {
+		ListNode* pre = NULL;
+		ListNode* next = NULL;
+		while (head != NULL) {
+			next = head->next;
+			head->next = pre;
+			pre = head;
+			head = next;
+		}
+		return pre;
+	}
 };
