@@ -12,7 +12,7 @@ Example:
 root = [5,3,6,2,4,null,7]
 key = 3
 
-    5
+	5
    / \
   3   6
  / \   \
@@ -22,7 +22,7 @@ Given key to delete is 3. So we find the node with value 3 and delete it.
 
 One valid answer is [5,4,6,2,null,null,7], shown in the following BST.
 
-    5
+	5
    / \
   4   6
  /     \
@@ -30,11 +30,11 @@ One valid answer is [5,4,6,2,null,null,7], shown in the following BST.
 
 Another valid answer is [5,2,6,null,4,null,7].
 
-    5
+	5
    / \
   2   6
    \   \
-    4   7
+	4   7
  */
 
 
@@ -51,8 +51,29 @@ Another valid answer is [5,2,6,null,4,null,7].
 class Solution {
 public:
 	TreeNode* deleteNode(TreeNode* root, int key) {
-		//搜索键值为key的结点
+		if (root == nullptr)
+			return nullptr;
+		if (key < root->val)
+			root->left = deleteNode(root->left, key);
+		else if (key > root->val)
+			root->right = deleteNode(root->right, key);
+		else// if(key == root->val)
+		{
+			if (root->left == nullptr)
+				return root->right;
+			else if (root->right == nullptr)
+				return root->left;
+			TreeNode *minNode = Mini(root->right);
+			root->val = minNode->val;
+			root->right = deleteNode(root->right, root->val);
+		}
+		return root;
+	}
 
-		//如果找到结点，删除该结点
+	TreeNode *Mini(TreeNode *x)
+	{
+		while (x->left != nullptr)
+			x = x->left;
+		return x;
 	}
 };
