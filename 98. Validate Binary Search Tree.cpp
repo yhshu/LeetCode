@@ -30,13 +30,13 @@ Binary tree [1,2,3], return false.
 class Solution {
 public:
 	bool isValidBST(TreeNode* root) {
-		return isValidBST(root, NULL, NULL);
+		return isValidBST(root, NULL, NULL);//重载，不是递归
 	}
 
 	bool isValidBST(TreeNode* root, TreeNode* minNode, TreeNode* maxNode) //子树中所有结点的值在 minNode 和 maxNode 的值之间
 	{
 		if (!root) return true;
-		if (minNode && root->val <= minNode->val || maxNode && root->val >= maxNode->val)
+		if (minNode && root->val <= minNode->val || maxNode && root->val >= maxNode->val) //首先判断本次调用是否存在最大值结点和最小值结点，如果存在判断root是否满足要求
 			return false;
 		return isValidBST(root->left, minNode, root) && isValidBST(root->right, root, maxNode);
 	}
