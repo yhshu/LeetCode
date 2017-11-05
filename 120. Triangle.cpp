@@ -17,18 +17,13 @@ Bonus point if you are able to do this using only O(n) extra space, where n is t
 class Solution {
 public:
 	int minimumTotal(vector<vector<int>>& triangle) {
-		int len = triangle.size();
-		if (!len)
-			return 0;
-		int res = triangle[0][0];
-		int j = 0;
-		for (auto i = 1; i != len; i++)
+		int size = triangle.size();
+		vector<int>sum(triangle.back());//最后一层
+		for (int layer = size - 2; layer >= 0; layer--)//倒数第二层:第一层
 		{
-			if (triangle[i][j] <= triangle[i][j + 1])
-				res += triangle[i][j];
-			else
-				res += triangle[i][++j];
+			for (int i = 0; i <= layer; i++)
+				sum[i] = min(sum[i], sum[i + 1]) + triangle[layer][i];
 		}
-		return res;
+		return sum[0];//第一层唯一元素
 	}
 };
