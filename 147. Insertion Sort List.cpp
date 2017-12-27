@@ -21,7 +21,7 @@ public:
 			{
 				while (pre->next && pre->next->val < cur->next->val)
 					pre = pre->next;//找到 cur->next 应属于的位置
-				//将 cur->next 插入到 pre 后
+				// 将 cur->next 插入到 pre 后
 				ListNode* temp = pre->next;
 				pre->next = cur->next;
 				cur->next = cur->next->next;
