@@ -54,18 +54,20 @@ public:
 		if (root == nullptr)
 			return nullptr;
 		if (key < root->val)
-			root->left = deleteNode(root->left, key);
+			root->left = deleteNode(root->left, key); // 在左子树中删除
 		else if (key > root->val)
-			root->right = deleteNode(root->right, key);
-		else// if(key == root->val)
+			root->right = deleteNode(root->right, key); // 在右子树中删除
+		else// if(key == root->val) 删除root
 		{
+			// 如果root仅有一个子结点，其子结点替换root；如果root是叶结点，直接删除
 			if (root->left == nullptr)
 				return root->right;
 			else if (root->right == nullptr)
 				return root->left;
-			TreeNode *minNode = Mini(root->right);
+			// 如果root有两个子结点
+			TreeNode *minNode = Mini(root->right); // minNode是root的后继
 			root->val = minNode->val;
-			root->right = deleteNode(root->right, root->val);
+			root->right = deleteNode(root->right, root->val); // 递归删除后继
 		}
 		return root;
 	}
