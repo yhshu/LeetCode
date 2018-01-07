@@ -23,6 +23,7 @@ return [1,3,2].
 class Solution {
 public:
 	vector<int> inorderTraversal(TreeNode* root) {
+		// µİ¹éÖĞĞò±éÀú
 		InorderTraversal(root);
 		return res;
 	}

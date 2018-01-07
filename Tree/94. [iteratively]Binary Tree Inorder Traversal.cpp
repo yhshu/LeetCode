@@ -1,4 +1,4 @@
-/*
+ï»¿/*
  Given a binary tree, return the inorder traversal of its nodes' values.
 
 For example:
@@ -31,23 +31,24 @@ return [1,3,2].
  */
 class Solution {
 public:
-	vector<int> inorderTraversal(TreeNode* root) {//ÖĞĞò±éÀú
+	vector<int> inorderTraversal(TreeNode* root) {
+		// è¿­ä»£ä¸­åºéå†
 		vector<int> res;
-		stack<TreeNode * >stack;
+		stack<TreeNode *>stack;
 		TreeNode *cur = root;
 
-		while (!stack.empty() || cur)//Õ»·Ç¿Õ»òÕßcur·Ç¿Õ
+		while (!stack.empty() || cur)//æ ˆéç©ºæˆ–è€…curéç©º
 		{
-			if (cur)//cur·Ç¿Õ£¬Ñ¹Õ»£¬ÖĞĞò±éÀúÈ¡×ó×Ó½áµã
+			if (cur)//curéç©ºï¼Œå‹æ ˆï¼Œä¸­åºéå†å–å·¦å­ç»“ç‚¹
 			{
 				stack.push(cur);
 				cur = cur->left;
 			}
-			else//curÎª¿Õ£¬Õ»·Ç¿Õ£¬µ¯Õ»
+			else//curä¸ºç©ºï¼Œæ ˆéç©ºï¼Œå¼¹æ ˆ
 			{
 				TreeNode *top = stack.top();
-				res.push_back(top->val);
 				stack.pop();
+				res.push_back(top->val);
 				cur = top->right;
 			}
 		}
