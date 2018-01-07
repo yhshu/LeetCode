@@ -41,7 +41,7 @@ public:
 		{
 			mp[node] = new UndirectedGraphNode(node->label);
 			for (UndirectedGraphNode * neigh : node->neighbors) // 遍历相邻顶点
-				mp[node]->neighbors.push_back(cloneGraph(neigh)); // 递归
+				mp[node]->neighbors.push_back(cloneGraph(neigh)); // 递归，并将其加入相邻顶点向量
 		}
 		return mp[node];
 	}

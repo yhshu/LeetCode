@@ -35,9 +35,30 @@ class Solution {
 public:
 	UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
 		// 广度优先搜索
-		
+		if (!node)
+			return nullptr;
+		UndirectedGraphNode * copy = new UndirectedGraphNode(node->label);
+		mp[node] = copy;
+		queue<UndirectedGraphNode *>toVisit; // 队列中顶点的相邻顶点会在之后被访问
+		toVisit.push(node);
+		while (!toVisit.empty())
+		{
+			UndirectedGraphNode *cur = toVisit.front();
+			toVisit.pop();
+			for (UndirectedGraphNode *neigh : cur->neighbors) // 遍历相邻顶点
+			{
+				if (mp.find(neigh) == mp.end())
+				{
+					UndirectedGraphNode *neigh_copy = new UndirectedGraphNode(neigh->label); // 构造新顶点
+					mp[neigh] = neigh_copy;
+					toVisit.push(neigh);
+				}
+				mp[cur]->neighbors.push_back(mp[neigh]); // 将新顶点添加到相邻顶点向量中
+			}
+		}
+		return mp[node];
 	}
 
 private:
-	
+	unordered_map<UndirectedGraphNode*, UndirectedGraphNode*>mp;
 };
