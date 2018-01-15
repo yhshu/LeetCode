@@ -12,13 +12,11 @@ Your function should return length = 2, with the first two elements of nums bein
 class Solution {
 public:
     int removeDuplicates(vector<int> &nums) {
-        if (nums.empty())return 0;
-        if (nums.begin() == nums.end() - 1)return 1;
-        int cnt = 1;
-        for (auto i = nums.begin() + 1; i != nums.end(); ++i) {
-            if (*(i - 1) != *i)
-                cnt++;
+        int a = 1;
+        for (int i = 1; i < nums.size(); ++i) {
+            if (nums[i] != nums[i - 1])
+                nums[a++] = nums[i];
         }
-        return cnt;
+        return a > nums.size() ? nums.size() : a;
     }
 };
