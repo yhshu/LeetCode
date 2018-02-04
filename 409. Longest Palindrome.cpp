@@ -25,16 +25,16 @@ public:
         bool odd = false;
         unordered_map<char, int> map;
         for (char c:s)
-            map[c]++;
+            map[c]++; // 统计字符个数
         for (auto i = map.begin(); i != map.end(); ++i) {
             res += i->second;
-            if (i->second % 2 == 1) {
+            if (i->second % 2 == 1) { // 该字符有奇数个
                 res -= 1;
                 odd = true;
             }
         }
         if (odd)
-            res++;
+            res++;  // 作为回文串中间的字符
         return res;
     }
 };
