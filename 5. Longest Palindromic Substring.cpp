@@ -24,9 +24,10 @@ public:
             return "";
         else if (s.size() == 1)
             return s;
+
         int min_start = 0, max_len = 1;
         for (int i = 0; i < s.size();) {
-            if (s.size() - i <= max_len / 2)
+            if (s.size() - i <= max_len / 2) // 不可能比当前已知回文子串更长
                 break;
             int left = i, right = i;
             while (k < s.size() - 1 && s[right] == s[right + 1]) // 跳过重复字符
