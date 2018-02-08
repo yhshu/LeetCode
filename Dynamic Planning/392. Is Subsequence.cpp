@@ -21,6 +21,15 @@ If there are lots of incoming S, say S1, S2, ... , Sk where k >= 1B, and you wan
 class Solution {
 public:
     bool isSubsequence(string s, string t) {
-        
+        const int t_size = t.size();
+        if (!s.size())return true;
+        if (!t_size)return false;
+        int i = 0;
+        for (char c:s) {
+            while (c != t[i++]) { // 无论等于与否，都执行i++
+                if (i >= t_size)return false;
+            }
+        }
+        return true;
     }
 };
