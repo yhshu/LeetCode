@@ -21,8 +21,8 @@ public:
         if (s.size() == 0)
             return 0;
         for (int i = 0; i < s.size(); i++) {
-            extendPalindrome(s, i, i); // 长度为奇数
-            extendPalindrome(s, i, i + 1); // 长度为偶数
+            extendPalindrome(s, i, i); // 查找长度为奇数的回文串
+            extendPalindrome(s, i, i + 1); // 查找长度为偶数的回文串
         }
         return count;
     }
