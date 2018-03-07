@@ -29,7 +29,7 @@ public:
 				if (grid[i][j] == '1')
 				{
 					count++;
-					DFS(grid, i, j);
+					DFS(grid, i, j); // 将所属岛屿沉没
 				}
 			}
 		}

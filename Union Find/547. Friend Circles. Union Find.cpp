@@ -40,7 +40,7 @@ public:
         for (int i = 0; i < M.size(); i++) {
             for (int j = 0; j < i; j++) {
                 if (M[i][j] == 1) {
-                    Union(i, j);
+                    Union(i, j); // 使i加入j
                     break;
                 }
             }
@@ -58,7 +58,7 @@ public:
         else return F[x] = Find(F[x]);
     }
 
-    void Union(int x, int y) {
+    void Union(int x, int y) { // 使x加入y
         F[Find(x)] = Find(y);
     }
 };
