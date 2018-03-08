@@ -17,9 +17,9 @@ class Solution {
 public:
     int numJewelsInStones(string J, string S) {
         int res = 0;
-        set<char> setJ(J.begin(), J.end());
+        set<char> setJ(J.begin(), J.end()); // J元素集合
         for (char c:S)
-            if (setJ.count(c))
+            if (setJ.count(c)) // 逐个判断S中的字符是否存在于J中
                 res++;
         return res;
     }

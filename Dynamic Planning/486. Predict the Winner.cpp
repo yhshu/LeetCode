@@ -24,9 +24,9 @@ public:
         vector <vector<int>> dp(n, vector<int>(n, 0)); // dp[i][j]的含义是从[i,j]中能获得的比对方多的积分
         for (int i = 0; i < n; i++)
             dp[i][i] = nums[i];
-        for (int k = 1; k < n; k++) { // 区间长度
-            for (int i = 0; i + k < n; i++) {
-                int j = i + k;
+        for (int len = 1; len < n; len++) { // 区间长度
+            for (int i = 0; i + len < n; i++) {
+                int j = i + len;
                 dp[i][j] = max(nums[i] - dp[i + 1][j], nums[j] - dp[i][j - 1]);
             }
         }

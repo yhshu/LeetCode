@@ -42,7 +42,7 @@ public:
     int findCircleNum(vector <vector<int>> &M) {
         // 求无向图连通分支数
         const int size = M.size();
-        vector<int> visited(size, 0);
+        vector<int> visited(size, 0); // vector<bool>不是容器
         int res = 0;
         for (int i = 0; i < size; i++) {
             if (!visited[i]) {

@@ -64,101 +64,30 @@ public:
         if (board[x][y] == 'M')
             board[x][y] = 'X';
         else if (board[x][y] == 'E') {
-            vector <vector<int>> clickSet;
-            vector<int> v;
-            int cnt = 0;
-            if (x > 0 && y > 0) {
-                switch (board[x - 1][y - 1]) {
-                    case 'M':
-                        cnt++;
-                        break;
-                    case 'E':
-                        v = {x - 1, y - 1};
-                        clickSet.push_back(v);
-                        break;
-                }
-            }
-            if (x > 0) {
-                switch (board[x - 1][y]) {
-                    case 'M':
-                        cnt++;
-                        break;
-                    case 'E':
-                        v = {x - 1, y};
-                        clickSet.push_back(v);
-                        break;
-                }
-            }
-            if (x > 0 && y < n - 1) {
-                switch (board[x - 1][y + 1]) {
-                    case 'M':
-                        cnt++;
-                        break;
-                    case 'E':
-                        v = {x - 1, y + 1};
-                        clickSet.push_back(v);
-                        break;
-                }
-            }
-            if (y > 0) {
-                switch (board[x][y - 1]) {
-                    case 'M':
-                        cnt++;
-                        break;
-                    case 'E':
-                        v = {x, y - 1};
-                        clickSet.push_back(v);
-                        break;
-                }
-            }
-            if (y < n - 1) {
-                switch (board[x][y + 1]) {
-                    case 'M':
-                        cnt++;
-                        break;
-                    case 'E':
-                        v = {x, y + 1};
-                        clickSet.push_back(v);
-                        break;
-                }
-            }
-            if (x < m - 1 && y > 0) {
-                switch (board[x + 1][y - 1]) {
-                    case 'M':
-                        cnt++;
-                        break;
-                    case 'E':
-                        v = {x + 1, y - 1};
-                        clickSet.push_back(v);
-                        break;
-                }
-            }
-            if (x < m - 1) {
-                switch (board[x + 1][y]) {
-                    case 'M':
-                        cnt++;
-                        break;
-                    case 'E':
-                        v = {x + 1, y};
-                        clickSet.push_back(v);
-                        break;
-                }
-            }
-            if (x < m - 1 && y < n - 1) {
-                switch (board[x + 1][y + 1]) {
-                    case 'M':
-                        cnt++;
-                        break;
-                    case 'E':
-                        v = {x + 1, y + 1};
-                        clickSet.push_back(v);
-                        break;
+            vector <vector<int>> clickSet; // 将被继续搜索的点
+            vector<int> v; // 表示坐标
+            int cnt = 0; // 附近地雷数量
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    int x_new = x + i;
+                    int y_new = y + j;
+                    vector<int> v = {x_new, y_new};
+                    if (x_new < 0 || x_new >= m || y_new < 0 || y_new >= n)
+                        continue;
+                    switch (board[x_new][y_new]) {
+                        case 'M':
+                            cnt++;
+                            break;
+                        case 'E':
+                            clickSet.push_back(v);
+                            break;
+                    }
                 }
             }
             if (cnt) // 如果附近有地雷，显示数字
                 board[x][y] = cnt + '0';
             else {
-                board[x][y] = 'B';
+                board[x][y] = 'B'; // 附近没有地雷
                 for (auto vec :clickSet)
                     updateBoard(board, vec);
             }

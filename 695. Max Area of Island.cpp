@@ -21,26 +21,25 @@ Note: The length of each dimension in the given grid does not exceed 50.
 
 class Solution {
 public:
-	int maxAreaOfIsland(vector<vector<int>>& grid) {
-		int res = 0;
-		for (int i = 0; i != grid.size(); ++i)
-		{
-			for (int j = 0; j != grid[0].size(); ++j)
-			{
-				if (grid[i][j] == 1)
-					res = max(res, AreaOfIsland(grid, i, j));
-			}
-		}
-		return res;
-	}
-	// DFS
-	int AreaOfIsland(vector<vector<int>>& grid, int i, int j)//¼ÆËã(i,j)ËùÔÚµºÓìµÄÃæ»ý
-	{
-		if (i >= 0 && i < grid.size() && j >= 0 && j < grid[0].size() && grid[i][j] == 1)//µ±Ç°ÊÇÔÚµºÓì
-		{
-			grid[i][j] = 0;//±ÜÃâÖØ¸´¼ÆËã
-			return 1 + AreaOfIsland(grid, i + 1, j) + AreaOfIsland(grid, i - 1, j) + AreaOfIsland(grid, i, j + 1) + AreaOfIsland(grid, i, j - 1);
-		}
-		return 0;
-	}
+    int maxAreaOfIsland(vector <vector<int>> &grid) {
+        int res = 0;
+        for (int i = 0; i != grid.size(); ++i) {
+            for (int j = 0; j != grid[0].size(); ++j) {
+                if (grid[i][j] == 1)
+                    res = max(res, AreaOfIsland(grid, i, j));
+            }
+        }
+        return res;
+    }
+
+    // DFS
+    int AreaOfIsland(vector <vector<int>> &grid, int i, int j) // è®¡ç®—(i,j)æ‰€åœ¨å²›å±¿é¢ç§¯
+    {
+        if (i >= 0 && i < grid.size() && j >= 0 && j < grid[0].size() && grid[i][j] == 1) // (i,j)åœ¨åœ°å›¾å†…å¹¶ä¸”æ˜¯å²›å±¿ä¸Š
+        {
+            grid[i][j] = 0; // ç›¸å½“äºŽvisitedæ ‡è®°
+            return 1 + AreaOfIsland(grid, i + 1, j) + AreaOfIsland(grid, i - 1, j) + AreaOfIsland(grid, i, j + 1) +
+                   AreaOfIsland(grid, i, j - 1);
+        } else return 0;
+    }
 };
