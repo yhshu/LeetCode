@@ -34,9 +34,9 @@ public:
         if (nums.size() == 1)
             return new TreeNode(nums[0]);
 
-        int mid = nums.size() / 2; // mid是数组索引，不是序号
+        int mid = nums.size() / 2; // mid用作数组索引，不是序号
         TreeNode *res = new TreeNode(nums[mid]);
-        vector<int> left(nums.begin(), nums.begin() + mid);
+        vector<int> left(nums.begin(), nums.begin() + mid); // 不包括nums[mid]
         vector<int> right(nums.begin() + mid + 1, nums.end());
         res->left = sortedArrayToBST(left);
         res->right = sortedArrayToBST(right);

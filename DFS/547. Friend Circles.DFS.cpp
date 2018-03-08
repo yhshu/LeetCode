@@ -46,7 +46,7 @@ public:
         int res = 0;
         for (int i = 0; i < size; i++) {
             if (!visited[i]) {
-                DFS(M, visited, i);
+                DFS(M, visited, i); // 将i朋友圈内所有朋友都标记vis
                 res++;
             }
         }

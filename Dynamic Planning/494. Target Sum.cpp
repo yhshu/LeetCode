@@ -21,16 +21,16 @@ There are 5 ways to assign symbols to make the sum of nums be target 3.
 class Solution {
 public:
     int findTargetSumWays(vector<int> &nums, int S) {
-        unordered_map<int, int> dp; // dp[sum]=cnt 所有数字和为sum的情况有cnt种
+        unordered_map<int, int> dp; // dp[sum]=cnt 表示代数和为sum的情况有cnt种
         dp[0] = 1;
         for (int num : nums) {
-            unordered_map<int, int> t;
-            for (auto a : dp) {
-                int sum = a.first, cnt = a.second;
-                t[sum + num] += cnt;
-                t[sum - num] += cnt;
+            unordered_map<int, int> dp_new;
+            for (auto assign : dp) {
+                int sum = assign.first, cnt = assign.second;
+                dp_new[sum + num] += cnt;
+                dp_new[sum - num] += cnt;
             }
-            dp = t;
+            dp = dp_new;
         }
         return dp[S];
     }

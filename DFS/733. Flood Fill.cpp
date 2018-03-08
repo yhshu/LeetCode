@@ -27,24 +27,19 @@ The value of each color in image[i][j] and newColor will be an integer in [0, 65
 // 图像填充
 class Solution {
 public:
-    bool visited[2505] = {0};
+    void floodFill(vector <vector<int>> &image, int sr, int sc, int oldColor, int newColor) {
+        if (sr >= 0 && sr < image.size() && sc >= 0 && sc < image[0].size() && image[sr][sc] == oldColor) {
+            image[sr][sc] = newColor;
+            floodFill(image, sr - 1, sc, oldColor, newColor);
+            floodFill(image, sr + 1, sc, oldColor, newColor);
+            floodFill(image, sr, sc - 1, oldColor, newColor);
+            floodFill(image, sr, sc + 1, oldColor, newColor);
+        }
+    }
 
     vector <vector<int>> floodFill(vector <vector<int>> &image, int sr, int sc, int newColor) {
-        const int m = image.size();
-        const int n = image[0].size();
-        if (visited[sr * n + sc])
-            return image;
-        visited[sr * n + sc] = true;
-        int oldColor = image[sr][sc];
-        image[sr][sc] = newColor;
-        if (sr - 1 >= 0 && image[sr - 1][sc] == oldColor)
-            floodFill(image, sr - 1, sc, newColor);
-        if (sr + 1 < m && image[sr + 1][sc] == oldColor)
-            floodFill(image, sr + 1, sc, newColor);
-        if (sc - 1 >= 0 && image[sr][sc - 1] == oldColor)
-            floodFill(image, sr, sc - 1, newColor);
-        if (sc + 1 < n && image[sr][sc + 1] == oldColor)
-            floodFill(image, sr, sc + 1, newColor);
+        if (image[sr][sc] != newColor) // oldColor起到vis标记的作用
+            floodFill(image, sr, sc, image[sr][sc], newColor);
         return image;
     }
 };

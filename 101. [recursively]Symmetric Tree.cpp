@@ -18,27 +18,27 @@ Note:
 Bonus points if you could solve it both recursively and iteratively.
  */
 
- /**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
 class Solution {
 public:
-	bool isSymmetric(TreeNode* root) {
-		return !root || judge(root->left, root->right);
-	}
+    bool isSymmetric(TreeNode *root) {
+        return !root || judge(root->left, root->right);
+    }
 
-	bool judge(TreeNode *left, TreeNode *right)
-	{
-		if (left == nullptr || right == nullptr)
-			return left == right;
-		if (left->val != right->val)
-			return false;
-		return judge(left->left, right->right) && judge(left->right, right->left);
-	}
+    bool judge(TreeNode *left, TreeNode *right) // 返回left与right是否对称
+    {
+        if (left == nullptr || right == nullptr)
+            return left == right;
+        if (left->val != right->val)
+            return false;
+        return judge(left->left, right->right) && judge(left->right, right->left);
+    }
 };

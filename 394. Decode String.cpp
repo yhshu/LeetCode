@@ -16,33 +16,29 @@ s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
 
 class Solution {
 public:
-	string DFS(string s, int &i)
-	{
-		string ans;
-		int cnt = 0;
-		while (i < s.size())
-		{
-			if (isdigit(s[i]))
-				cnt = cnt * 10 + (s[i++] - '0');//½«Á¬ÐøµÄÊý×Ö×Ö·û×ª»¯ÎªÑ­»·´ÎÊýcnt
-			else if (s[i] == '[')
-			{
-				string tem = DFS(s, ++i);
-				for (int i = 0; i < cnt; i++) 
-					ans += tem;
-				cnt = 0;
-			}
-			else if (s[i] == ']')
-			{
-				i++;
-				return ans;
-			}
-			else ans += s[i++];
-		}
-		return ans;
-	}
+    string DFS(const string &s, int &i) {
+        // iæ˜¯ç´¢å¼•
+        string ans;
+        int cnt = 0;
+        while (i < s.size()) {
+            if (isdigit(s[i]))
+                cnt = cnt * 10 + (s[i++] - '0'); // å°†è¿žç»­çš„æ•°å­—å­—ç¬¦è½¬åŒ–ä¸ºå¾ªçŽ¯æ¬¡æ•°cnt
+            else if (s[i] == '[') {
+                string tem = DFS(s, ++i);
+                for (int i = 0; i < cnt; i++) // å°†æ–¹æ‹¬å·ä¸­çš„å­—ç¬¦ä¸²é‡å¤cntæ¬¡
+                    ans += tem;
+                cnt = 0;
+            } else if (s[i] == ']') {
+                i++;
+                return ans;
+            } else // æ™®é€šå­—æ¯
+                ans += s[i++];
+        }
+        return ans;
+    }
 
-	string decodeString(string s) {
-		int i = 0;
-		return DFS(s, i);
-	}
+    string decodeString(string s) {
+        int i = 0;
+        return DFS(s, i);
+    }
 };

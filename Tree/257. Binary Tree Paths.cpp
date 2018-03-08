@@ -25,7 +25,7 @@ All root-to-leaf paths are:
 class Solution {
 public:
     void binaryTreePaths(vector <string> &res, TreeNode *root, string str) {
-        if (!root->left && !root->right) {
+        if (!root->left && !root->right) { // 叶结点
             res.push_back(str);
             return;
         }
