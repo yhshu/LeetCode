@@ -21,25 +21,26 @@ Output:
 
 class Solution {
 public:
-    void combination(vector <vector<int>> &res, vector<int> &sol, int k, int n) {
-        if (sol.size() == k && n == 0) { // 符合条件
+    vector <vector<int>> combinationSum3(int k, int n) {
+        // 1到9的九个数字，其中选k个，每个最多一次，加和为n
+        vector <vector<int>> res;
+        vector<int> sol;
+        combinationSum3(res, sol, k, n);
+        return res;
+    }
+
+    void combinationSum3(vector <vector<int>> &res, vector<int> &sol, int k, int remain) {
+        if (sol.size() == k && remain == 0) { // 符合条件
             res.push_back(sol);
             return;
         }
         if (sol.size() < k) {
-            for (int i = sol.empty() ? 1 : sol.back() + 1; i <= 9 && i <= n; i++) {
+            for (int i = sol.empty() ? 1 : sol.back() + 1; i <= 9 && i <= remain; i++) {
                 // 注意i的两个限定条件
                 sol.push_back(i);
-                combination(res, sol, k, n - i);
+                combinationSum3(res, sol, k, remain - i);
                 sol.pop_back();
             }
         }
-    }
-
-    vector <vector<int>> combinationSum3(int k, int n) {
-        vector <vector<int>> res;
-        vector<int> sol;
-        combination(res, sol, k, n);
-        return res;
     }
 };

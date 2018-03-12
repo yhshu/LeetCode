@@ -35,8 +35,7 @@ public:
         if (size == 0)return true;
         else if (size == 1)return false;
 
-        bool dp[size + 1][sum + 1]; // dp[i][j]表示前i个数能否凑出j
-        memset(dp, false, sizeof(dp));
+        bool dp[size + 1][sum + 1]={}; // dp[i][j]表示nums的前i个数[0...i-1]能否凑出j
 
         for (int i = 0; i <= size; i++) {
             dp[i][0] = true; // 前i个数全不选

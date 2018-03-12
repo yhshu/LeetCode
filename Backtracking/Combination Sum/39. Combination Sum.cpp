@@ -14,26 +14,28 @@ A solution set is:
 ]
  */
 
+
 class Solution {
 public:
     vector <vector<int>> combinationSum(vector<int> &candidates, int target) {
+        // candidates中的每个元素可选多次，加和为target
         sort(candidates.begin(), candidates.end());
-        vector<int> cur;
+        vector<int> sol;
         vector <vector<int>> res;
-        combinationSum(candidates, candidates.begin(), cur, res, target);
+        combinationSum(candidates, 0, sol, res, target);
         return res;
     }
 
-    void
-    combinationSum(vector<int> &candidates, vector<int>::iterator it, vector<int> &cur, vector <vector<int>> &res,
-                   int target) {
-        if (target == 0) {
-            res.push_back(cur);
+    void combinationSum(vector<int> &candidates, int start, vector<int> &sol, vector <vector<int>> &res,
+                        int remain) {
+        if (remain == 0) {
+            res.push_back(sol);
+            return;
         }
-        for (auto i = it; i != candidates.end() && target - *i >= 0; i++) {
-            cur.push_back(*i);
-            combinationSum(candidates, i, cur, res, target - *i);
-            cur.pop_back();
+        for (int i = start; i < candidates.size() && remain - candidates[i] >= 0; i++) {
+            sol.push_back(candidates[i]);
+            combinationSum(candidates, i, sol, res, remain - candidates[i]);
+            sol.pop_back();
         }
     }
 };
