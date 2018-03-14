@@ -18,7 +18,7 @@ class Solution {
 public:
     vector <vector<int>> permute(vector<int> &nums) {
         // 本题可直接调用next_permutation
-        // 使用如下回溯，顺序并不严格
+        // 使用如下回溯法，顺序并不严格
         vector <vector<int>> res;
         permute(nums, 0, res);
         return res;

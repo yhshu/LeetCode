@@ -21,12 +21,12 @@ public:
         return res;
     }
 
-    void backtrack(vector <string> &res, string str, int left, int right, int &n) {
+    void backtrack(vector <string> &res, string str, int left, int right, const int &n) {
         // res 需返回的字符串向量
         // str 当前回溯的字符串
         // left 当前左括号个数
         // right 当前右括号个数
-        // n 括号对数
+        // n 括号对数，即左括号的个数或右括号的个数
         if (str.size() == 2 * n) { // 当前字符串满足条件，添加到res
             res.push_back(str);
             return;
