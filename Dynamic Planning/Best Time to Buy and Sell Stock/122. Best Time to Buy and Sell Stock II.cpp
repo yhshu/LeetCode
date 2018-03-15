@@ -9,6 +9,7 @@ Design an algorithm to find the maximum profit. You may complete as many transac
 class Solution {
 public:
     int maxProfit(vector<int> &prices) {
+        // 可进行多次交易，但买入之前必须卖出当前持有的股票
         if (prices.size() <= 1)return 0;
         int res = 0;
         for (int i = 1; i < prices.size(); i++) {

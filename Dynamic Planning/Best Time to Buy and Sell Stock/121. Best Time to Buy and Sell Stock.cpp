@@ -18,13 +18,13 @@ In this case, no transaction is done, i.e. max profit = 0.
 class Solution {
 public:
     int maxProfit(vector<int> &prices) {
+        // 仅允许买入一次，卖出一次
         int minVal = INT_MAX; // 最低价格
         int res = 0; // 最大利润
-        for (auto i = prices.begin(); i != prices.end(); ++i) {
-            if (*i < minVal)
-                minVal = *i;
-            else if (*i - minVal > res)
-                res = *i - minVal;
+        for (int i = 0; i < prices.size(); i++) {
+            if (prices[i] < minVal)
+                minVal = prices[i];
+            else res = max(res, prices[i] - minVal);
         }
         return res;
     }
