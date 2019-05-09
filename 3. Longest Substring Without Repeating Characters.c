@@ -11,7 +11,7 @@ Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer 
 */
 
 int judgeRepeat(const char *start, const char *end) {
-    //在字符串中返回移动长度，不在字符串中返回0，即不移动.
+    // 在字符串中返回移动长度，不在字符串中返回0，即不移动.
     int ret = 0;
     char *i = start;
     while (i != end) {
@@ -20,18 +20,19 @@ int judgeRepeat(const char *start, const char *end) {
         ret++;
         i++;
     }
-    return 0;// 没有与*end 相同的字符，不移动，返回0
+    return 0;// 没有与 *end 相同的字符，不移动，返回0
 }
 
 int lengthOfLongestSubstring(char *s) {
     if (*s == NULL)
         return 0;
-    int ret = 1;//最终返回的最大子串长度
-    int cnt = 1;//记录子串长度
+    int ret = 1;  // 最终返回的最大子串长度
+    int cnt = 1;  // 记录子串长度
     char *start = s, *end = s;
 
     for (; *end != NULL; ++end) {
-        if (end - start < 0)start = end;
+        if (end - start < 0)
+            start = end;
         else
             start += judgeRepeat(start, end);
         cnt = (end - start) + 1;
